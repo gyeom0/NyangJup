@@ -1,0 +1,39 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+Packages/com.unity.package-manager-ui/
+[Bb]in/
+
+# Cache
+[Ll]ibrary/PackageCache/
+[Ll]ibrary/ScriptAssemblies/
+[Ll]ibrary/ShaderCache/
+[Ll]ibrary/Artifacts/
+
+# Visual Studio / JetBrains
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build files
+*.apk
+*.aab
+*.unitypackage
