@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -86,6 +87,24 @@ public class GameManager : MonoBehaviour
     SaveData();
     Debug.Log($"[GameManager] 고양이 획득! 도감 고양이 수: {TotalCats}");
   }
+
+  public void GoToMainScene()
+  {
+    CurrentGameState = GameState.Main;
+    SceneManager.LoadScene("MainScene");
+  }
+  public void GoToCameraScene()
+  {
+
+    CurrentGameState = GameState.Camera;
+    SceneManager.LoadScene("CameraScene");
+  }
+  public void GoToCollectionScene()
+  {
+    CurrentGameState = GameState.Collection;
+    SceneManager.LoadScene("CollectionScene");
+  }
+
 
   void OnApplicationPause(bool pauseStatus) //백그라운드 시 자동저장
   {
