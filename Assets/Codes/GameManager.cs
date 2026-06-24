@@ -18,11 +18,11 @@ public class GameManager : MonoBehaviour
 
   public string PlayerName { get; private set; } = "집사";
   public int TinCount { get; private set; } = 10;
-  public int TotalCatsFound { get; private set; } = 0;
+  public int TotalCats { get; private set; } = 0;
 
   const string KEY_PLAYER_NAME = "PlayerName";
   const string KEY_TIN_COUNT = "TinCount";
-  const string KEY_TOTAL_CATS_FOUND = "TotalCatsFound";
+  const string KEY_TOTAL_CATS = "TotalCats";
 
   void Awake()
   {
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
   {
     PlayerPrefs.SetString(KEY_PLAYER_NAME, PlayerName);
     PlayerPrefs.SetInt(KEY_TIN_COUNT, TinCount);
-    PlayerPrefs.SetInt(KEY_TOTAL_CATS_FOUND, TotalCatsFound);
+    PlayerPrefs.SetInt(KEY_TOTAL_CATS, TotalCats);
     PlayerPrefs.Save();
 
     Debug.Log("[GameManager] 저장 완료");
@@ -52,9 +52,39 @@ public class GameManager : MonoBehaviour
   {
     PlayerName = PlayerPrefs.GetString(KEY_PLAYER_NAME, "집사");
     TinCount = PlayerPrefs.GetInt(KEY_TIN_COUNT, 10);
-    TotalCatsFound = PlayerPrefs.GetInt(KEY_TOTAL_CATS_FOUND, 0);
+    TotalCats = PlayerPrefs.GetInt(KEY_TOTAL_CATS, 0);
 
     Debug.Log($"[GameManager] 불러오기 완료 - {PlayerName}, 통조림: {TinCount}개");
+  }
+
+  public bool UseTin(int amount = 1)
+  {
+    if (TinCount < amount)
+    {
+      Debug.Log("[GameManager] 통조림 부족");
+      return false;
+    }
+    else
+    {
+      TinCount -= amount;
+      SaveData();
+      Debug.Log($"[GameManager] 통조림 사용 - {amount}개, 남은 통조림: {TinCount}개");
+      return true;
+    }
+  }
+
+  public void AddTin(int amount)
+  {
+    TinCount += amount;
+    SaveData();
+    Debug.Log($"[GameManager] 통조림 획득 - {amount}개, 총 통조림: {TinCount}개");
+  }
+
+  public void OnCatCaught()
+  {
+    TotalCats++;
+    SaveData();
+    Debug.Log($"[GameManager] 고양이 획득! 도감 고양이 수: {TotalCats}");
   }
 
   void OnApplicationPause(bool pauseStatus) //백그라운드 시 자동저장
