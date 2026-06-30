@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 125853152}
   - component: {fileID: 125853151}
   m_Layer: 5
-  m_Name: TinCountText
+  m_Name: BaitCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -642,7 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c7dd2220f374acf819be86d9f4d433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tinCountText: {fileID: 125853151}
+  baitCountText: {fileID: 125853151}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,11 +18,11 @@ public class GameManager : MonoBehaviour
   public GameState CurrentGameState { get; private set; } = GameState.Main;
 
   public string PlayerName { get; private set; } = "집사";
-  public int TinCount { get; private set; } = 10;
+  public int BaitCount { get; private set; } = 10;
   public int TotalCats { get; private set; } = 0;
 
   const string KEY_PLAYER_NAME = "PlayerName";
-  const string KEY_TIN_COUNT = "TinCount";
+  const string KEY_BAIT_COUNT = "BaitCount";
   const string KEY_TOTAL_CATS = "TotalCats";
 
   void Awake()
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
   public void SaveData()
   {
     PlayerPrefs.SetString(KEY_PLAYER_NAME, PlayerName);
-    PlayerPrefs.SetInt(KEY_TIN_COUNT, TinCount);
+    PlayerPrefs.SetInt(KEY_BAIT_COUNT, BaitCount);
     PlayerPrefs.SetInt(KEY_TOTAL_CATS, TotalCats);
     PlayerPrefs.Save();
 
@@ -52,33 +52,33 @@ public class GameManager : MonoBehaviour
   public void LoadData()
   {
     PlayerName = PlayerPrefs.GetString(KEY_PLAYER_NAME, "집사");
-    TinCount = PlayerPrefs.GetInt(KEY_TIN_COUNT, 10);
+    BaitCount = PlayerPrefs.GetInt(KEY_BAIT_COUNT, 10);
     TotalCats = PlayerPrefs.GetInt(KEY_TOTAL_CATS, 0);
 
-    Debug.Log($"[GameManager] 불러오기 완료 - {PlayerName}, 통조림: {TinCount}개");
+    Debug.Log($"[GameManager] 불러오기 완료 - {PlayerName}, 미끼: {BaitCount}개");
   }
 
-  public bool UseTin(int amount = 1)
+  public bool UseBait(int amount = 1)
   {
-    if (TinCount < amount)
+    if (BaitCount < amount)
     {
-      Debug.Log("[GameManager] 통조림 부족");
+      Debug.Log("[GameManager] 미끼 부족");
       return false;
     }
     else
     {
-      TinCount -= amount;
+      BaitCount -= amount;
       SaveData();
-      Debug.Log($"[GameManager] 통조림 사용 - {amount}개, 남은 통조림: {TinCount}개");
+      Debug.Log($"[GameManager] 미끼 사용 - {amount}개, 남은 미끼: {BaitCount}개");
       return true;
     }
   }
 
-  public void AddTin(int amount)
+  public void AddBait(int amount)
   {
-    TinCount += amount;
+    BaitCount += amount;
     SaveData();
-    Debug.Log($"[GameManager] 통조림 획득 - {amount}개, 총 통조림: {TinCount}개");
+    Debug.Log($"[GameManager] 미끼 획득 - {amount}개, 총 미끼: {BaitCount}개");
   }
 
   public void OnCatCaught()

@@ -5,24 +5,24 @@ using TMPro;
 
 public class MainSceneUI : MonoBehaviour
 {
-  public TextMeshProUGUI tinCountText;
+  public TextMeshProUGUI baitCountText;
 
   void Start()
   {
-    UpdateTinUI();
+    UpdateBaitUI();
   }
 
   void Update()
   {
     if (Input.GetKeyDown(KeyCode.Space))
     {
-      GameManager.Instance.AddTin(1);
-      UpdateTinUI();
+      GameManager.Instance.AddBait(1);
+      UpdateBaitUI();
     }
     if (Input.GetKeyDown(KeyCode.R))
     {
-      GameManager.Instance.UseTin();
-      UpdateTinUI();
+      GameManager.Instance.UseBait();
+      UpdateBaitUI();
     }
   }
 
@@ -36,9 +36,9 @@ public class MainSceneUI : MonoBehaviour
     GameManager.Instance.GoToCollectionScene();
   }
 
-  void UpdateTinUI()
+  void UpdateBaitUI()
   {
-    tinCountText.text = $"통조림: {GameManager.Instance.TinCount}개";
+    baitCountText.text = $"미끼: {GameManager.Instance.BaitCount}개";
   }
 
 
