@@ -19,6 +19,12 @@ public class MainSceneUI : MonoBehaviour
       GameManager.Instance.AddBait(1);
       UpdateBaitUI();
     }
+
+    if (Input.GetKeyDown(KeyCode.R))
+    {
+      GameManager.Instance.ResetData();
+      UpdateBaitUI();
+    }
   }
 
   public void OnClickCameraButton()

@@ -39,6 +39,13 @@ public class GameManager : MonoBehaviour
     }
   }
 
+  public void ResetData()
+  {
+    BaitCount = 10;
+    TotalCats = 0;
+    SaveData();
+  }
+
   public void SaveData()
   {
     PlayerPrefs.SetString(KEY_PLAYER_NAME, PlayerName);
