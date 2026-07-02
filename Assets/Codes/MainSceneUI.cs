@@ -19,11 +19,6 @@ public class MainSceneUI : MonoBehaviour
       GameManager.Instance.AddBait(1);
       UpdateBaitUI();
     }
-    if (Input.GetKeyDown(KeyCode.R))
-    {
-      GameManager.Instance.UseBait();
-      UpdateBaitUI();
-    }
   }
 
   public void OnClickCameraButton()
@@ -40,8 +35,4 @@ public class MainSceneUI : MonoBehaviour
   {
     baitCountText.text = $"미끼: {GameManager.Instance.BaitCount}개";
   }
-
-
-
-
 }
