@@ -8,6 +8,7 @@ public class CameraScene : MonoBehaviour
 {
   public RawImage CameraView;
   WebCamTexture webCamTexture;
+  Texture2D capturedTexture;
 
   public GameObject FoucusButton;
   public GameObject MinigamePanel;
@@ -16,6 +17,7 @@ public class CameraScene : MonoBehaviour
   public RectTransform RedZone;
   public TextMeshProUGUI ResultText;
   public GameObject RedFlash;
+  public GameObject SuccessPanel;
   float direction = 1f;
   float speed = 500f;
   bool isMinigamePlaying = false;
@@ -82,14 +84,20 @@ public class CameraScene : MonoBehaviour
         Debug.Log("[CameraScene] 고양이 잡기 성공!");
         GameManager.Instance.OnCatCaught();
         isMinigamePlaying = false;
-
-
+        MinigamePanel.SetActive(false);
         // 카드 만들고 도감등록 하는 걸로 이어지는 로직
+        capturedTexture = new Texture2D(webCamTexture.width, webCamTexture.height);
+        capturedTexture.SetPixels(webCamTexture.GetPixels());
+        capturedTexture.Apply();
+        SuccessPanel.SetActive(true);
+
+        GameManager.Instance.CapturedCatTexture = capturedTexture;
       }
       else
       {
         // 타이밍 맞았지만 도망
         isMinigamePlaying = false;
+        SuccessPanel.SetActive(false);
         StartCoroutine(ShowTextAndClose("고양이가 도망갔어요!"));
       }
     }
@@ -99,6 +107,12 @@ public class CameraScene : MonoBehaviour
       StartCoroutine(FlashRed());
       Handheld.Vibrate();
     }
+  }
+
+  public void OnClickNextButton()
+  {
+    SuccessPanel.SetActive(false);
+    GameManager.Instance.GoToCatProfileScene();
   }
   void SetRedZone()
   {

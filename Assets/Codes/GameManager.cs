@@ -11,11 +11,13 @@ public class GameManager : MonoBehaviour
   {
     Main,
     Camera,
-    Catching,
-    Collection
+    Collection,
+    CatProfile
   }
 
   public GameState CurrentGameState { get; private set; } = GameState.Main;
+
+  public Texture2D CapturedCatTexture;
 
   public string PlayerName { get; private set; } = "집사";
   public int BaitCount { get; private set; } = 10;
@@ -112,6 +114,11 @@ public class GameManager : MonoBehaviour
     SceneManager.LoadScene("CollectionScene");
   }
 
+  public void GoToCatProfileScene()
+  {
+    CurrentGameState = GameState.CatProfile;
+    SceneManager.LoadScene("CatProfileScene");
+  }
 
   void OnApplicationPause(bool pauseStatus) //백그라운드 시 자동저장
   {
