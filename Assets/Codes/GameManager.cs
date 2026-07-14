@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -55,6 +56,10 @@ public class GameManager : MonoBehaviour
     PlayerPrefs.SetInt(KEY_TOTAL_CATS, TotalCats);
     PlayerPrefs.Save();
 
+    CatDataList list = new CatDataList(); // 빈 보관함 만들기
+    list.cats = CaughtCats; // 고양이 리스트 담기
+    File.WriteAllText(Path.Combine(Application.persistentDataPath, "cats.json"), JsonUtility.ToJson(list));
+
     Debug.Log("[GameManager] 저장 완료");
   }
 
@@ -63,6 +68,13 @@ public class GameManager : MonoBehaviour
     PlayerName = PlayerPrefs.GetString(KEY_PLAYER_NAME, "집사");
     BaitCount = PlayerPrefs.GetInt(KEY_BAIT_COUNT, 10);
     TotalCats = PlayerPrefs.GetInt(KEY_TOTAL_CATS, 0);
+
+    string path = Path.Combine(Application.persistentDataPath, "cats.json"); // 파일 경로
+    if (File.Exists(path)) // 파일 있을 때만 불러오기
+    {
+      CatDataList list = JsonUtility.FromJson<CatDataList>(File.ReadAllText(path)); // JSON -> 객체
+      CaughtCats = list.cats; // 불러온 리스트 게임에 적용
+    }
 
     Debug.Log($"[GameManager] 불러오기 완료 - {PlayerName}, 미끼: {BaitCount}개");
   }
