@@ -82,7 +82,6 @@ public class CameraScene : MonoBehaviour
       {
         //포획성공
         Debug.Log("[CameraScene] 고양이 잡기 성공!");
-        GameManager.Instance.OnCatCaught();
         isMinigamePlaying = false;
         MinigamePanel.SetActive(false);
         // 카드 만들고 도감등록 하는 걸로 이어지는 로직
@@ -109,7 +108,7 @@ public class CameraScene : MonoBehaviour
     }
   }
 
-  public void OnClickNextButton()
+  public void OnClickCreateCardButton()
   {
     SuccessPanel.SetActive(false);
     GameManager.Instance.GoToCatProfileScene();

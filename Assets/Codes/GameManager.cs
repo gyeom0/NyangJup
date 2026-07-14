@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
   public static GameManager Instance { get; private set; }
+  public GameState CurrentGameState { get; private set; } = GameState.Main;
 
   public enum GameState
   {
@@ -14,8 +15,7 @@ public class GameManager : MonoBehaviour
     Collection,
     CatProfile
   }
-
-  public GameState CurrentGameState { get; private set; } = GameState.Main;
+  public List<CatData> CaughtCats = new List<CatData>();
 
   public Texture2D CapturedCatTexture;
 
@@ -90,8 +90,9 @@ public class GameManager : MonoBehaviour
     Debug.Log($"[GameManager] 미끼 획득 - {amount}개, 총 미끼: {BaitCount}개");
   }
 
-  public void OnCatCaught()
+  public void AddCat(CatData catData)
   {
+    CaughtCats.Add(catData);
     TotalCats++;
     SaveData();
     Debug.Log($"[GameManager] 고양이 획득! 도감 고양이 수: {TotalCats}");
