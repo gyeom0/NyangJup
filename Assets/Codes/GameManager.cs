@@ -56,10 +56,6 @@ public class GameManager : MonoBehaviour
     PlayerPrefs.SetInt(KEY_TOTAL_CATS, TotalCats);
     PlayerPrefs.Save();
 
-    CatDataList list = new CatDataList(); // 빈 보관함 만들기
-    list.cats = CaughtCats; // 고양이 리스트 담기
-    File.WriteAllText(Path.Combine(Application.persistentDataPath, "cats.json"), JsonUtility.ToJson(list));
-
     Debug.Log("[GameManager] 저장 완료");
   }
 
@@ -77,6 +73,13 @@ public class GameManager : MonoBehaviour
     }
 
     Debug.Log($"[GameManager] 불러오기 완료 - {PlayerName}, 미끼: {BaitCount}개");
+  }
+
+  void SaveCats()
+  {
+    CatDataList list = new CatDataList(); // 빈 보관함 만들기
+    list.cats = CaughtCats; // 고양이 리스트 담기
+    File.WriteAllText(Path.Combine(Application.persistentDataPath, "cats.json"), JsonUtility.ToJson(list));
   }
 
   public bool UseBait(int amount = 1)
@@ -107,6 +110,7 @@ public class GameManager : MonoBehaviour
     CaughtCats.Add(catData);
     TotalCats++;
     SaveData();
+    SaveCats();
     Debug.Log($"[GameManager] 고양이 획득! 도감 고양이 수: {TotalCats}");
   }
 
