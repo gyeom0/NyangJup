@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
     Debug.Log($"[GameManager] 불러오기 완료 - {PlayerName}, 미끼: {BaitCount}개");
   }
 
-  void SaveCats()
+  public void SaveCats()
   {
     CatDataList list = new CatDataList(); // 빈 보관함 만들기
     list.cats = CaughtCats; // 고양이 리스트 담기

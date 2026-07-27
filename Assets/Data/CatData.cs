@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
-// CatData 클래스를 직렬화 가능하게 만들어서 JSON으로 저장할 수 있도록 함
+public enum Gender { 미등록, 암컷, 수컷, 중성 }
+
 [System.Serializable]
 public class CatData
 {
@@ -8,6 +9,8 @@ public class CatData
   public string date;
   public string location;
   public string photoPath;
+  public Gender gender = Gender.미등록;
+  public string memo = "";
 }
 [System.Serializable]
 public class CatDataList
