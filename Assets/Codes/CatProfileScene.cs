@@ -11,6 +11,8 @@ public class CatProfileScene : MonoBehaviour
   public TMP_InputField NameInputField;
   public TextMeshProUGUI DateText;
   public TextMeshProUGUI LocationText;
+  public TextMeshProUGUI WarningText;
+  bool isShowingWarning = false;
 
   void Start()
   {
@@ -20,8 +22,26 @@ public class CatProfileScene : MonoBehaviour
     LocationText.text = "위치 불러오는 중...";
   }
 
+  IEnumerator ShowWarning()
+  {
+    isShowingWarning = true;
+    WarningText.gameObject.SetActive(true);
+    yield return new WaitForSeconds(2f);
+    WarningText.gameObject.SetActive(false);
+    isShowingWarning = false;
+  }
+
   public void OnClickSaveButton()
   {
+    if (isShowingWarning) return;
+
+    bool isDuplicate = GameManager.Instance.CaughtCats.Exists(c => c.name == NameInputField.text);
+    if (isDuplicate)
+    {
+      StartCoroutine(ShowWarning());
+      return;
+    }
+
     CatData newCata = new CatData();
     newCata.name = NameInputField.text;
     newCata.date = DateText.text;
