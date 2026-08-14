@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 504859240}
   - component: {fileID: 504859239}
   m_Layer: 5
-  m_Name: NameInputField
+  m_Name: NameInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

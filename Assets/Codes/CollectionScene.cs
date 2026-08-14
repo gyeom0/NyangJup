@@ -11,7 +11,8 @@ public class CollectionScene : MonoBehaviour
   public Transform Content;
   public Slider BagGauge;
   public TextMeshProUGUI BagGaugeText;
-  public CardPanel cardPanel;
+  public CardPanel CardPanel;
+  public EditPanel EditPanel;
   public GameObject SelectionBar;
   public Button EditButton;
   List<CatListItem> selectedItems = new List<CatListItem>();
@@ -26,7 +27,7 @@ public class CollectionScene : MonoBehaviour
     {
       GameObject item = Instantiate(CatListItemPrefab, Content);
       int index = GameManager.Instance.CaughtCats.IndexOf(cat);
-      item.GetComponent<CatListItem>().Setup(cat, index, cardPanel, this);
+      item.GetComponent<CatListItem>().Setup(cat, index, CardPanel, this);
     }
   }
 
@@ -44,6 +45,13 @@ public class CollectionScene : MonoBehaviour
     }
     GameManager.Instance.SaveCats();
     SceneManager.LoadScene("CollectionScene");
+  }
+
+  public void OnClickEditButton()
+  {
+    CatData cat = selectedItems[0].GetCatData();
+    int index = GameManager.Instance.CaughtCats.IndexOf(cat);
+    EditPanel.Show(cat, index);
   }
 
   public void OnItemSelected(CatListItem item, bool selected)

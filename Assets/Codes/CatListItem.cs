@@ -14,12 +14,14 @@ public class CatListItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
   bool isDragging = false;
   bool isLongPressed = false;
   CollectionScene collectionScene;
+  Color originalColor;
   CatData catData;
 
   void Awake()
   {
     CatThumbnail = GetComponentInChildren<RawImage>();
     CatNameText = GetComponentInChildren<TextMeshProUGUI>();
+    originalColor = GetComponent<Image>().color;
   }
 
   public void Setup(CatData cat, int index, CardPanel cardPanel, CollectionScene collectionScene)
@@ -64,7 +66,7 @@ public class CatListItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
   public void SetSelected(bool selected)
   {
     isSelected = selected;
-    GetComponent<Image>().color = selected ? new Color(0.4f, 0.4f, 0.4f, 1f) : new Color(1f, 1f, 1f, 0.2f);
+    GetComponent<Image>().color = selected ? new Color(0.4f, 0.4f, 0.4f, 1f) : originalColor;
   }
 
   public CatData GetCatData() => catData;

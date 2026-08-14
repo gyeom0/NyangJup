@@ -5,16 +5,18 @@ using System.IO;
 
 public class CardPanel : MonoBehaviour
 {
-  public RawImage CatImage;
   public TextMeshProUGUI NumberText;
-  public TextMeshProUGUI NameText;
-  public TextMeshProUGUI DateText;
-  public TextMeshProUGUI LocationText;
+  public RawImage CatImage;
   public Image GenderIcon;
+  public TextMeshProUGUI NameText;
+  public TextMeshProUGUI LocationText;
+  public TextMeshProUGUI DateText;
   public TMP_InputField MemoInputField;
+  public GameObject Overlay;
 
   public void Show(CatData cat, int index)
   {
+    Overlay.SetActive(true);
     NumberText.text = "No." + (index + 1);
     NameText.text = cat.name;
     DateText.text = cat.date;
@@ -34,6 +36,7 @@ public class CardPanel : MonoBehaviour
 
   public void OnClickCloseButton()
   {
+    Overlay.SetActive(false);
     gameObject.SetActive(false);
   }
 }
